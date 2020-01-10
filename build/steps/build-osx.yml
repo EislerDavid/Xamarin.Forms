@@ -14,8 +14,8 @@ steps:
     condition: eq(variables['provisioningCake'], 'true')
     inputs:
       targetType: 'filePath'
-      filePath: 'build.sh  --TeamProject="variables['System.TeamProject']"'
-      arguments: --target provision
+      filePath: 'build.sh'
+      arguments: --target provision --TeamProject="variables['System.TeamProject']"
 
   - task: UseDotNet@2
     displayName: 'Install .net core $(DOTNET_VERSION)'
