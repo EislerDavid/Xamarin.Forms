@@ -70,11 +70,18 @@ steps:
       provProfileSecureFile: 'Xamarin Forms iOS Provisioning.mobileprovision'
 
   - task: XamariniOS@2
-    displayName: 'Build Xamarin.iOS solution $(slnPath) '
+    displayName: 'Build Control Gallery IPA'
     inputs:
-      solutionFile: $(slnPath)
+      solutionFile: 'Xamarin.Forms.ControlGallery.iOS/Xamarin.Forms.ControlGallery.iOS.csproj'
       configuration: $(buildConfiguration)
-      args: /bl:$(Build.ArtifactStagingDirectory)/ios.binlog
+      args: /bl:$(Build.ArtifactStagingDirectory)/ios-cg.binlog
+
+  - task: MSBuild@1
+    displayName: 'Build iOS Tests'
+    inputs:
+      solutionFile: 'Xamarin.Forms.Core.iOS.UITests/Xamarin.Forms.Core.iOS.UITests.csproj'
+      configuration: $(buildConfiguration)
+      msbuildArguments: /bl:$(Build.ArtifactStagingDirectory)/ios-uitests.binlog  /p:Platform=iPhone /p:BuildIpa=true
 
   - task: CopyFiles@2
     displayName: 'Copy test-cloud.exe'

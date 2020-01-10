@@ -158,7 +158,6 @@ stages:
           provisionator.osxPath : 'build/provisioning/provisioning.csx'
           provisionator.signPath : 'build/provisioning/provisioning_sign.csx'
           buildConfiguration: $(DefaultBuildConfiguration)
-          slnPath: $(SolutionFile)
           iOSCertSecureFileName: 'Xamarin Forms iOS Certificate.p12'
           iOSProvisioningSecureFileName: 'Xamarin Forms iOS Provisioning.mobileprovision'
           monoVersion : $(MONO_VERSION)
