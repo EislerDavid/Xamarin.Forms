@@ -43,7 +43,7 @@ jobs:
         inputs:
           targetType: 'filePath'
           filePath: 'build.sh'
-          arguments: --target provision
+          arguments: --target provision --TeamProject="variables['System.TeamProject']"
 
       - task: UseDotNet@2
         displayName: 'Install .net core $(DOTNET_VERSION)'

@@ -14,7 +14,7 @@ steps:
     condition: eq(variables['provisioningCake'], 'true')
     inputs:
       targetType: 'filePath'
-      filePath: 'build.sh'
+      filePath: 'build.sh  --TeamProject="variables['System.TeamProject']"'
       arguments: --target provision
 
   - task: UseDotNet@2
