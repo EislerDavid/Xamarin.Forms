@@ -15,7 +15,7 @@ steps:
     inputs:
       targetType: 'filePath'
       filePath: 'build.sh'
-      arguments: --target provision --TeamProject="variables['System.TeamProject']"
+      arguments: --target provision --TeamProject="$(System.TeamProject)"
 
   - task: UseDotNet@2
     displayName: 'Install .net core $(DOTNET_VERSION)'
@@ -69,19 +69,19 @@ steps:
     inputs:
       provProfileSecureFile: 'Xamarin Forms iOS Provisioning.mobileprovision'
 
-  - task: XamariniOS@2
+  - task: MSBuild@1
     displayName: 'Build Control Gallery IPA'
     inputs:
       solutionFile: 'Xamarin.Forms.ControlGallery.iOS/Xamarin.Forms.ControlGallery.iOS.csproj'
       configuration: $(buildConfiguration)
-      args: /bl:$(Build.ArtifactStagingDirectory)/ios-cg.binlog
+      msbuildArguments: /bl:$(Build.ArtifactStagingDirectory)/ios-cg.binlog /p:BuildIpa=true
 
   - task: MSBuild@1
     displayName: 'Build iOS Tests'
     inputs:
       solutionFile: 'Xamarin.Forms.Core.iOS.UITests/Xamarin.Forms.Core.iOS.UITests.csproj'
       configuration: $(buildConfiguration)
-      msbuildArguments: /bl:$(Build.ArtifactStagingDirectory)/ios-uitests.binlog  /p:Platform=iPhone /p:BuildIpa=true
+      msbuildArguments: /bl:$(Build.ArtifactStagingDirectory)/ios-uitests.binlog
 
   - task: CopyFiles@2
     displayName: 'Copy test-cloud.exe'
