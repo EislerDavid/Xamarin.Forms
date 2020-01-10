@@ -72,14 +72,14 @@ steps:
   - task: MSBuild@1
     displayName: 'Build Control Gallery IPA'
     inputs:
-      solutionFile: 'Xamarin.Forms.ControlGallery.iOS/Xamarin.Forms.ControlGallery.iOS.csproj'
+      solution: 'Xamarin.Forms.ControlGallery.iOS/Xamarin.Forms.ControlGallery.iOS.csproj'
       configuration: $(buildConfiguration)
       msbuildArguments: /bl:$(Build.ArtifactStagingDirectory)/ios-cg.binlog /p:BuildIpa=true
 
   - task: MSBuild@1
     displayName: 'Build iOS Tests'
     inputs:
-      solutionFile: 'Xamarin.Forms.Core.iOS.UITests/Xamarin.Forms.Core.iOS.UITests.csproj'
+      solution: 'Xamarin.Forms.Core.iOS.UITests/Xamarin.Forms.Core.iOS.UITests.csproj'
       configuration: $(buildConfiguration)
       msbuildArguments: /bl:$(Build.ArtifactStagingDirectory)/ios-uitests.binlog
 
